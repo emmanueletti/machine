@@ -1,0 +1,23 @@
+# General
+.vagrant/
+
+# VirtualBox
+*.vbox
+*.vbox-prev
+*.vdi
+*.vmdk
+*.vmcx
+*.vmrs
+*.log
+*.iso
+
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
