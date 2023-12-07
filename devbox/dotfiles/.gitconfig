@@ -3,6 +3,9 @@
   email = emmanueletti@gmail.com
 [core]
   editor = vim
+  excludesfile = ~/.gitignore_global
+  quotepath = false
+  autocrlf = input
 [init]
   defaultBranch = main
 [color]
@@ -12,9 +15,11 @@
   branch = auto
   interactive = auto
 [push]
-	default = current
+	default = simple
 [pull]
-  ff = only
+  rebase = true
+[include]
+  path = ~/.gitconfig.local
 [commit]
   template = ~/.gitmessage
 [filter "lfs"]

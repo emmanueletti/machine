@@ -32,9 +32,14 @@ Vagrant.configure("2") do |config|
   # within the machine from a port on the host machine and only allow access
   # via 127.0.0.1 to disable public access
   config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1", guest_ip: "127.0.0.1"
-  config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "127.0.0.1", guest_ip: "127.0.0.1" # rails
-  config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "10.0.2.2", guest_ip: "10.0.2.2" # rails browser console
-  config.vm.network "forwarded_port", guest: 5432, host: 5432, host_ip: "127.0.0.1", guest_ip: "127.0.0.1" # postgres
+  # Rails
+  config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "127.0.0.1", guest_ip: "127.0.0.1"
+  # Rails browser console
+  config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "10.0.2.2", guest_ip: "10.0.2.2"
+  # Postgres
+  config.vm.network "forwarded_port", guest: 5432, host: 5432, host_ip: "127.0.0.1", guest_ip: "127.0.0.1"
+  # Redis
+  config.vm.network "forwarded_port", guest: 6379, host: 6379, host_ip: "127.0.0.1", guest_ip: "127.0.0.1"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -49,7 +54,7 @@ Vagrant.configure("2") do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  # config.vm.synced_folder "../dotfiles", "/vagrant_data/dotfiles"
+  config.vm.synced_folder "./shared", "home/vagrant/shared"
 
   # Disable the default share of the current code directory. Doing this
   # provides improved isolation between the vagrant box and your host
@@ -67,7 +72,7 @@ Vagrant.configure("2") do |config|
     # vb.gui = true
 
     # Customize VM resources:
-    vb.memory = "8192"
+    vb.memory = "4000"
     vb.cpus = "2"
   end
   #
@@ -77,72 +82,13 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "file", source: "./dotfiles", destination: "/home/vagrant"
-  config.vm.provision "shell", privileged: false, inline: <<~SHELL
-    sudo apt-get update
-    sudo apt-get -y install build-essential
-
-    # Install core tools
-    sudo apt-get -y install git
-    sudo apt-get -y install tmux
-    sudo apt-get -y install vim
-    sudo apt-get -y install curl
-    sudo apt-get -y install jq
-
-    # Install dependencies needed to build Ruby
-    sudo apt-get -y install autoconf
-    sudo apt-get -y install patch
-    sudo apt-get -y install build-essential
-    sudo apt-get -y install rustc
-    sudo apt-get -y install libssl-dev
-    sudo apt-get -y install libyaml-dev
-    sudo apt-get -y install libreadline6-dev
-    sudo apt-get -y install zlib1g-dev
-    sudo apt-get -y install libgmp-dev
-    sudo apt-get -y install libncurses5-dev
-    sudo apt-get -y install libffi-dev
-    sudo apt-get -y install libgdbm6
-    sudo apt-get -y install libgdbm-dev
-    sudo apt-get -y install libdb-dev
-    sudo apt-get -y install uuid-dev
-
-    # Install NodeJS (Required for Rails)
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
-    source ~/.nvm/nvm.sh
-    nvm install --lts
-
-    # Install rbenv and ruby-build
-    git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-    echo 'eval "$(~/.rbenv/bin/rbenv init - bash)"' >> ~/.bashrc
-    eval "$(~/.rbenv/bin/rbenv init - bash)"
-    source ~/.bashrc
-    git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
-
-    # Install data stores
-    sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-    sudo apt-get -y install postgresql
-    sudo apt-get -y install libpq-dev
-
-    sudo apt-get -y install sqlite3
-
-    # Install Ruby on Rails environment
-    rbenv install --verbose 3.2.2
-    rbenv global 3.2.2
-    gem install bundler
-    gem install rails
-    gem install pg
-    gem install solargraph
-    rbenv rehash
-
-    # Configure postgres
-    sudo -u postgres createuser vagrant -s && sudo -u postgres createdb vagrant
-
-    # Configure developer experience
-    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
-    && sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
-    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
-    && sudo apt-get update \
-    && sudo apt-get install gh -y
-  SHELL
+  config.vm.synced_folder "./dotfiles", '/home/vagrant/dotfiles'
+  config.vm.provision 'shell', privileged: false, inline: '/home/vagrant/dotfiles/install.sh'
+  config.vm.provision "shell", path: "bootstrap.sh"
+  config.vm.provision "docker" do |d|
+    d.pull_images "postgres:15"
+    d.pull_images "redis:7-alpine"
+  end
+  # Change the vagrant user's shell to use zsh
+  config.vm.provision :shell, inline: "chsh -s /bin/zsh vagrant"
 end
