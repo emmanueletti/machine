@@ -1,5 +1,9 @@
 # General
 .vagrant/
+.DS_Store
+.AppleDouble
+.LSOverride
+rubyonmac/*
 
 # VirtualBox
 *.vbox
@@ -10,11 +14,6 @@
 *.vmrs
 *.log
 *.iso
-
-# General
-.DS_Store
-.AppleDouble
-.LSOverride
 
 # Icon must end with two \r
 Icon
