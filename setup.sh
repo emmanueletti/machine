@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until script has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 # Set up host machine
 echo "🚀 Setting up host machine"
 
@@ -12,8 +18,8 @@ echo "🐚 Setting zsh as the default shell"
 chsh -s $(which zsh)
 
 # Move dotfiles to home directory
-echo "📂 Moving dotfiles to home directory"
-cp ./dotfiles/.* ~/
+echo "📂 Copying dotfiles to home directory"
+cp -rf ./dotfiles/.* ~/
 
 # Install Homebrew
 echo "🍺 Installing Homebrew"
@@ -91,13 +97,6 @@ if [[ "$*" == *"--include-mac-settings"* ]]; then
 
   # GENERAL
 
-  # Set computer name to $HOSTNAME (as done via System Preferences → Sharing)
-  # HOSTNAME="emmanueletti"
-  # sudo scutil --set ComputerName $HOSTNAME
-  # sudo scutil --set HostName $HOSTNAME
-  # sudo scutil --set LocalHostName $HOSTNAME
-  # sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $HOSTNAME
-
   # Show IP address, hostname, OS version when clicking the clock in the login window
   sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
   # Disable the sound effects on boot
@@ -153,12 +152,11 @@ else
   echo "pass '--include-mac-settings' flag if want macos defaults set"
 fi
 
+exec $SHELL
+
 echo "✨ Setup completed successfully"
-echo "  Restart shell or run 'exec $SHELL' to see changes"
-echo "  May have to run 'p10k configure' if prompt does not change automatically"
+echo "  Update iTerm config for changes to font, color, and icons"
 echo "  Manually install:"
-echo "  - Ruby on Mac (if wanted)"
 echo "  - Hemingway Editor 3"
 echo "  - JPEGmini"
-echo "  - Spotica Menu"
 echo "✨ Restart computer to see all changes"

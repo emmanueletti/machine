@@ -21,13 +21,13 @@ Make the install script executable
 
 ```bash
 cd machine
-chmod -x setup.sh
+chmod +x ./setup.sh
 ```
 
 Run the script to configure your host machine
 
 ```bash
-setup.sh --include-mac-settings
+./setup.sh --include-mac-settings
 ```
 
 Remove the `--include-mac-settings` flag if you do not want to change your mac settings.
