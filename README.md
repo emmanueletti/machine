@@ -6,6 +6,7 @@ A simple script to setup a new macbook alongside a disposable development enviro
 
 - [Installation](#installation)
 - [Devbox usage](#devbox-usage)
+- [Connecting vscode to devbox](#connecting-vscode-to-devbox)
 - [License](#license)
 
 ## Installation
@@ -61,6 +62,10 @@ boom
 # Useful when you've only changed the provision script and don't want a full `devup`
 provide
 ```
+
+## Connecting vscode to devbox
+
+[Helpful guide](https://medium.com/@lizrice/ssh-to-vagrant-from-vscode-5b2c5996bc0e)
 
 ## License
 

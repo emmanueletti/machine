@@ -113,6 +113,8 @@ if [[ "$*" == *"--include-mac-settings"* ]]; then
   echo " Require password immediately after sleep or screen saver begins"
   defaults write com.apple.screensaver askForPassword -int 1
   defaults write com.apple.screensaver askForPasswordDelay -int 0
+  # Disable transparency in the menu bar and elsewhere
+  defaults write com.apple.universalaccess reduceTransparency -bool true
 
   # KEYBOARD
   # Disable press-and-hold for keys in favor of key repeat

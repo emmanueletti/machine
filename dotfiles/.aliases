@@ -6,7 +6,7 @@ alias r='exec $SHELL'
 # Personal productivity
 alias cshell='vim ~/.zshrc'
 alias cvim='vim ~/.vimrc'
-alias gtfo='history -p'
+alias gtfo='history -c'
 alias devup='cd ~/machine/devbox && vagrant up'
 alias devssh='cd ~/machine/devbox && vagrant ssh'
 alias halt='cd ~/machine/devbox && vagrant halt'
