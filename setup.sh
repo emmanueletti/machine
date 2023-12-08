@@ -19,7 +19,7 @@ chsh -s $(which zsh)
 
 # Move dotfiles to home directory
 echo "📂 Copying dotfiles to home directory"
-cp -rf ./dotfiles/.* ~/
+cp -f ./dotfiles/.[!.]* ~/
 
 # Install Homebrew
 echo "🍺 Installing Homebrew"
@@ -113,6 +113,14 @@ if [[ "$*" == *"--include-mac-settings"* ]]; then
   echo " Require password immediately after sleep or screen saver begins"
   defaults write com.apple.screensaver askForPassword -int 1
   defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+  # KEYBOARD
+  # Disable press-and-hold for keys in favor of key repeat
+  defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+  # Set a blazingly fast keyboard repeat rate
+  defaults write NSGlobalDomain KeyRepeat -int 1
+  defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
   # TRACKPAD
   # Enable tap to click for this user and for the login screen
