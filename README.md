@@ -6,7 +6,6 @@ A simple script to setup a new macbook alongside a disposable development enviro
 
 - [Installation](#installation)
 - [Devbox usage](#devbox-usage)
-- [Configs usage](#configs-usage)
 - [License](#license)
 
 ## Installation
@@ -62,10 +61,6 @@ boom
 # Useful when you've only changed the provision script and don't want a full `devup`
 provide
 ```
-
-## Configs usage
-
-Use the `configs` directory as a centralized store for application configurations.
 
 ## License
 
