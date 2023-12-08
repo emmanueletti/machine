@@ -15,6 +15,10 @@ Vagrant.configure("2") do |config|
   config.vm.box = "debian/bookworm64"
   config.vm.hostname = "devbox"
 
+  if Vagrant.has_plugin?("vagrant-vbguest") then
+    config.vbguest.auto_update = false
+  end
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -24,26 +28,23 @@ Vagrant.configure("2") do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # NOTE: This will enable public access to the opened port
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
-  # config.vm.network :forwarded_port, host: 5432, guest: 5432 # postgres
-  # config.vm.network :forwarded_port, host: 3000, guest: 3000 # rails
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network :forwarded_port, host: 3000, guest: 3000 # rails
+  config.vm.network :forwarded_port, host: 5432, guest: 5432 # postgres
+  config.vm.network :forwarded_port, host: 6379, guest: 6379 # redis
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
   # via 127.0.0.1 to disable public access
-  config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1", guest_ip: "127.0.0.1"
-  # Rails
-  config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "127.0.0.1", guest_ip: "127.0.0.1"
-  # Rails browser console
+  # Rails browser consoles
   config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "10.0.2.2", guest_ip: "10.0.2.2"
-  # Postgres
-  config.vm.network "forwarded_port", guest: 5432, host: 5432, host_ip: "127.0.0.1", guest_ip: "127.0.0.1"
-  # Redis
-  config.vm.network "forwarded_port", guest: 6379, host: 6379, host_ip: "127.0.0.1", guest_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "192.168.33.1", guest_ip: "192.168.33.1"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
+  # rails browser consoles
   config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "private_network", ip: "192.168.33.1"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -54,14 +55,14 @@ Vagrant.configure("2") do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder "./shared", "home/vagrant/shared"
+  # config.vm.synced_folder "./shared", "home/vagrant/shared"
 
   # Disable the default share of the current code directory. Doing this
   # provides improved isolation between the vagrant box and your host
   # by making sure your Vagrantfile isn't accessable to the vagrant box.
   # If you use this you may want to enable additional shared subfolders as
   # shown above.
-  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder ".", "/shared", disabled: false
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -72,7 +73,7 @@ Vagrant.configure("2") do |config|
     # vb.gui = true
 
     # Customize VM resources:
-    vb.memory = "4000"
+    vb.memory = "5000"
     vb.cpus = "2"
   end
   #
@@ -82,13 +83,27 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.synced_folder "./dotfiles", '/home/vagrant/dotfiles'
-  config.vm.provision 'shell', privileged: false, inline: '/home/vagrant/dotfiles/install.sh'
-  config.vm.provision "shell", path: "bootstrap.sh"
+  config.vm.provision "file", source: "~/machine/dotfiles/.aliases", destination: ".aliases"
+  config.vm.provision "file", source: "~/machine/dotfiles/.p10k.zsh", destination: ".p10k.zsh"
+  config.vm.provision "file", source: "~/machine/dotfiles/.inputrc", destination: ".inputrc"
+  config.vm.provision "file", source: "~/machine/dotfiles/.gitconfig", destination: ".gitconfig"
+  config.vm.provision "file", source: "~/machine/dotfiles/.gitmessage", destination: ".gitmessage"
+  config.vm.provision "file", source: "~/machine/dotfiles/.gitignore_global", destination: ".gitignore_global"
+  config.vm.provision "file", source: "~/machine/dotfiles/.bashrc", destination: ".bashrc"
+  config.vm.provision "file", source: "~/machine/dotfiles/.vimrc", destination: ".vimrc"
+  config.vm.provision "file", source: "~/machine/dotfiles/.zshrc", destination: ".zshrc"
+
+  config.vm.provision "shell", privileged: false, path: "bootstrap.sh"
+
   config.vm.provision "docker" do |d|
     d.pull_images "postgres:15"
     d.pull_images "redis:7-alpine"
+    d.pull_images "ruby:3.2.2-slim"
   end
+
   # Change the vagrant user's shell to use zsh
-  config.vm.provision :shell, inline: "chsh -s /bin/zsh vagrant"
+  config.vm.provision :shell, inline: <<-SCRIPT
+    echo "Changing default shell to zsh"
+    chsh -s /bin/zsh vagrant
+  SCRIPT
 end
