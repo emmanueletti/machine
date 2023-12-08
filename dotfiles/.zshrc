@@ -5,8 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# zsh powerlevel10k theme
-source /usr/local/share/powerlevel10k/powerlevel10k.zsh-theme
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Turn off case sensitivity with tab autocomplete
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
@@ -30,11 +30,29 @@ zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
 fpath=(~/.zsh $fpath)
 autoload -Uz compinit && compinit
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# zsh plugins
-source "$(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme"
-source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+
+  # Zsh plugins
+  source "$(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme"
+  source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+
+  # Zsh plugins
+  source ~/powerlevel10k/powerlevel10k.zsh-theme
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+  # Ruby
+  source /usr/local/share/chruby/chruby.sh
+  source /usr/local/share/chruby/auto.sh
+  chruby ruby-3.2.2
+
+  # Node
+  export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/plugins/node-build/bin:$PATH"
+  eval "$(nodenv init - zsh)"
+  nodenv global 20.10.0
+
+fi
+

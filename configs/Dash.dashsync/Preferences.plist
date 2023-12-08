@@ -86,7 +86,7 @@
 			<key>devise</key>
 			<dict>
 				<key>date</key>
-				<date>2023-04-06T02:14:19Z</date>
+				<date>2023-12-08T02:05:28Z</date>
 				<key>entry</key>
 				<dict>
 					<key>name</key>
@@ -100,7 +100,7 @@
 			<key>minitest</key>
 			<dict>
 				<key>date</key>
-				<date>2023-08-26T02:18:39Z</date>
+				<date>2023-12-08T02:05:24Z</date>
 				<key>entry</key>
 				<dict>
 					<key>name</key>
@@ -114,7 +114,7 @@
 			<key>sorbet</key>
 			<dict>
 				<key>date</key>
-				<date>2023-12-07T02:23:48Z</date>
+				<date>2023-12-08T02:05:23Z</date>
 				<key>entry</key>
 				<dict>
 					<key>name</key>
@@ -164,7 +164,7 @@
 			<key>Tailwind_CSS</key>
 			<dict>
 				<key>date</key>
-				<date>2023-12-07T02:05:15Z</date>
+				<date>2023-12-08T02:05:16Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>

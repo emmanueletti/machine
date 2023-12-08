@@ -1,26 +1,67 @@
 # Machine
 
-Macbook setup script + disposable development environment.
+A simple script to setup a new macbook alongside a disposable development environment. Inspired by [Mitchell Hashimoto](https://github.com/mitchellh/nixos-config) and [Ivan Velichko](https://iximiuz.com/en/posts/how-to-setup-development-environment/) and born out of a need to jump from laptop to laptop.
 
-Inspired by [Mitchell Hashimoto](https://github.com/mitchellh/nixos-config) and [Ivan Velichko](https://iximiuz.com/en/posts/how-to-setup-development-environment/)
+## Table of Contents <!-- omit in toc -->
 
-## Table of Contents
-
-- [Table of Contents](#table-of-contents)
 - [Installation](#installation)
+- [Devbox usage](#devbox-usage)
+- [Configs usage](#configs-usage)
 - [License](#license)
 
 ## Installation
 
 Clone from github
 
-Run the `setup.sh` script
+```bash
+gh repo clone emmanueletti/machine
+```
 
-Restart shell
+Make the install script executable
 
-Run `devup` to initialize the vagrant development environment
+```bash
+cd machine
+chmod -x setup.sh
+```
 
-Run `dev` to ssh into a running development vagrant environment from any directory😬
+Run the script to configure your host machine
+
+```bash
+setup.sh --include-mac-settings
+```
+
+Remove the `--include-mac-settings` flag if you do not want to change your mac settings.
+
+Restart iTerm or run `exec $SHELL`
+
+Restart laptop for changes to mac settings to take effect.
+
+## Devbox usage
+
+All devbox commands can be run from any terminal location. They are all aliases
+around vagrant commands.
+
+```bash
+# initialize the vagrant VM dev environment
+devup
+
+# ssh into a running environment
+dev
+
+# shutdown a running environment
+halt
+
+# destroy an environment
+boom
+
+# re-provision the vagrant VM environment. 
+# Useful when you've only changed the provision script and don't want a full `devup`
+provide
+```
+
+## Configs usage
+
+Use the `configs` directory as a centralized store for application configurations.
 
 ## License
 

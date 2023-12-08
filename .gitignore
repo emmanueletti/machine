@@ -15,6 +15,9 @@ rubyonmac/*
 *.log
 *.iso
 
+# Devbox
+*.ssh-config
+
 # Icon must end with two \r
 Icon
 
