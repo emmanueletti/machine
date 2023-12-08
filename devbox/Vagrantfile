@@ -84,12 +84,11 @@ Vagrant.configure("2") do |config|
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "file", source: "~/machine/dotfiles/.aliases", destination: ".aliases"
-  config.vm.provision "file", source: "~/machine/dotfiles/.p10k.zsh", destination: ".p10k.zsh"
-  config.vm.provision "file", source: "~/machine/dotfiles/.inputrc", destination: ".inputrc"
   config.vm.provision "file", source: "~/machine/dotfiles/.gitconfig", destination: ".gitconfig"
-  config.vm.provision "file", source: "~/machine/dotfiles/.gitmessage", destination: ".gitmessage"
   config.vm.provision "file", source: "~/machine/dotfiles/.gitignore_global", destination: ".gitignore_global"
-  config.vm.provision "file", source: "~/machine/dotfiles/.bashrc", destination: ".bashrc"
+  config.vm.provision "file", source: "~/machine/dotfiles/.gitmessage", destination: ".gitmessage"
+  config.vm.provision "file", source: "~/machine/dotfiles/.inputrc", destination: ".inputrc"
+  config.vm.provision "file", source: "~/machine/dotfiles/.p10k.zsh", destination: ".p10k.zsh"
   config.vm.provision "file", source: "~/machine/dotfiles/.vimrc", destination: ".vimrc"
   config.vm.provision "file", source: "~/machine/dotfiles/.zshrc", destination: ".zshrc"
 

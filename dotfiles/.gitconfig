@@ -16,6 +16,7 @@
   interactive = auto
 [push]
 	default = simple
+  autoSetupRemote = true
 [pull]
   rebase = true
 [include]
