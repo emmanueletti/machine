@@ -11,28 +11,32 @@ A simple script to setup a new macbook alongside a disposable development enviro
 
 ## Installation
 
-Clone from github
+Step 1. If setting up new macbook from scratch, download the project as ZIP and move to the home dir
+
+```bash
+mv ~/Downloads/machine-main ~/machine
+```
+
+if gh or git is already present, then clone from github
 
 ```bash
 gh repo clone emmanueletti/machine
 ```
 
-Make the install script executable
+Step 2. Make the install script executable
 
 ```bash
-cd machine
+cd ~/machine
 chmod +x ./setup.sh
 ```
 
-Run the script to configure your host machine
+Step 3. Run the script to configure your host machine
 
 ```bash
 ./setup.sh --include-mac-settings
 ```
 
 Remove the `--include-mac-settings` flag if you do not want to change your mac settings.
-
-Restart iTerm or run `exec $SHELL`
 
 Restart laptop for changes to mac settings to take effect.
 
