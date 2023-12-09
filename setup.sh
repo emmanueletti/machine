@@ -19,7 +19,7 @@ chsh -s $(which zsh)
 
 # Move dotfiles to home directory
 echo "📂 Copying dotfiles to home directory"
-cp -f ./dotfiles/.[!.]* ~/
+find ./dotfiles -name ".*" | xargs -I {} cp -f {} ~/
 
 # Install Homebrew
 echo "🍺 Installing Homebrew"
