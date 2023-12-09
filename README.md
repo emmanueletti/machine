@@ -59,13 +59,15 @@ halt
 boom
 
 # re-provision the vagrant VM environment. 
-# Useful when you've only changed the provision script and don't want a full `devup`
 provide
+# Useful when you only want to update the VM based on provision changes.
+# As opposed to a full destroy and `devup` which would nuke the VM and scrap all
+# the ssh configs, package / gem installations, and such.
 ```
 
 ## Connecting vscode to devbox
 
-[Helpful guide](https://medium.com/@lizrice/ssh-to-vagrant-from-vscode-5b2c5996bc0e)
+[Guide](https://medium.com/@lizrice/ssh-to-vagrant-from-vscode-5b2c5996bc0e)
 
 ## License
 
