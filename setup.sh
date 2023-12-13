@@ -44,9 +44,7 @@ echo "🍺 Installing Homebrew casks"
 brew install --cask brave-browser
 brew install --cask bruno
 brew install --cask dash
-brew install --cask devutils
 brew install --cask iterm2
-brew install --cask stats
 brew install --cask tableplus
 brew install --cask virtualbox
 brew install --cask visual-studio-code
@@ -73,7 +71,6 @@ brew install --cask raycast
 brew install --cask slack
 brew install --cask spotify
 brew install --cask vlc
-brew install --cask whatsapp
 brew install --cask zoom
 
 # Install Homebrew fonts
