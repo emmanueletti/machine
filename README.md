@@ -1,6 +1,6 @@
 # Machine
 
-A simple script to setup a new macbook alongside a disposable development environment. Inspired by [Mitchell Hashimoto](https://github.com/mitchellh/nixos-config) and [Ivan Velichko](https://iximiuz.com/en/posts/how-to-setup-development-environment/) and born out of a need to jump from laptop to laptop.
+A simple script to setup a new macbook alongside a lightweight disposable development environment for hacking, experiments, and playing around with new tools. Inspired by [Mitchell Hashimoto](https://github.com/mitchellh/nixos-config) and [Ivan Velichko](https://iximiuz.com/en/posts/how-to-setup-development-environment/) and born out of a need to jump from laptop to laptop.
 
 ## Table of Contents <!-- omit in toc -->
 

@@ -63,7 +63,7 @@ fi
 
 ## ruby
 if [ ! -d "/home/vagrant/.rubies/ruby-3.2.2" ]; then
-  ruby-install ruby 3.2.2
+  ruby-install ruby 3.3
 fi
 
 ## node
