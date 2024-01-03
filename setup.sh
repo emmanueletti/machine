@@ -21,6 +21,11 @@ chsh -s $(which zsh)
 echo "📂 Copying dotfiles to home directory"
 find ./dotfiles -name ".*" | xargs -I {} cp -f {} ~/
 
+# Setup git completion
+echo "🐙 Setting up git completion"
+mkdir -p ~/.zsh
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.zsh/git-completion.bash
+
 # Install Homebrew
 echo "🍺 Installing Homebrew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -37,6 +42,13 @@ brew install powerlevel10k
 brew install tldr
 brew install trash
 brew install zsh-syntax-highlighting
+brew install sqlite
+brew install tmux
+brew install entr
+brew install jq
+brew install wget
+brew install tree
+brew install overmind
 
 # Install Homebrew Cask
 echo "🍺 Installing Homebrew casks"
@@ -48,6 +60,7 @@ brew install --cask iterm2
 brew install --cask tableplus
 brew install --cask virtualbox
 brew install --cask visual-studio-code
+brew install --cask docker
 # personal tools
 brew install --cask 1password
 brew install --cask appcleaner
@@ -80,6 +93,25 @@ brew install --cask font-fira-code
 brew install --cask font-fira-code-nerd-font
 brew install --cask font-jetbrains-mono
 brew install --cask font-jetbrains-mono-nerd-font
+
+# Setup dev environment
+echo "🌐 Setting up dev environment"
+
+echo "🦀 Installing rust"
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
+
+echo "💎 Installing ruby and global gems"
+brew install chruby
+brew install ruby-install
+ruby-install ruby 3.3
+~/.rubies/ruby-3.3.0/bin/gem install bundler
+~/.rubies/ruby-3.3.0/bin/gem install solargraph
+~/.rubies/ruby-3.3.0/bin/gem install standardrb
+
+echo "🟢 Installing node"
+brew install nodenv
+nodenv install 20.10.0
+nodenv global 20.10.0
 
 # Set Mac settings
 # https://macos-defaults.com/

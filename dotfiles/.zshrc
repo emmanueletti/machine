@@ -38,21 +38,26 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   source "$(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme"
   source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-
-  # Zsh plugins
-  source ~/powerlevel10k/powerlevel10k.zsh-theme
-  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
   # Ruby
-  source /usr/local/share/chruby/chruby.sh
-  source /usr/local/share/chruby/auto.sh
-  chruby ruby-3.2.2
+  source "$(brew --prefix)/opt/chruby/share/chruby/chruby.sh"
+  source "$(brew --prefix)/opt/chruby/share/chruby/auto.sh"
+  chruby ruby-3.3
+  export RUBY_YJIT_ENABLE=1
 
   # Node
   export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/plugins/node-build/bin:$PATH"
   eval "$(nodenv init - zsh)"
   nodenv global 20.10.0
+
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+
+  # zsh plugins
+  source ~/powerlevel10k/powerlevel10k.zsh-theme
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+  # chruby
+  source /usr/local/share/chruby/chruby.sh
+  source /usr/local/share/chruby/auto.sh
 
 fi
 

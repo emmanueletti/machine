@@ -75,8 +75,8 @@ alias dcub='docker compose up --build'
 alias dcd='docker compose down'
 alias dcr='docker compose restart'
 alias dce='docker compose exec'
-alias dshell='docker compose exec web bash'
-alias dcedbsh='docker compose exec db bash'
+alias websh='docker compose exec web bash'
+alias dbsh='docker compose exec db bash'
 
 # Homebrew
 alias bubc='brew upgrade && brew cleanup'
