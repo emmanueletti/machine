@@ -76,7 +76,7 @@ alias dcd='docker compose down'
 alias dcr='docker compose restart'
 alias dce='docker compose exec'
 alias dshell='docker compose exec web bash'
-alias dcedbsh='docker compost exec db bash'
+alias dcedbsh='docker compose exec db bash'
 
 # Homebrew
 alias bubc='brew upgrade && brew cleanup'
