@@ -26,6 +26,10 @@ echo "🐙 Setting up git completion"
 mkdir -p ~/.zsh
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.zsh/git-completion.bash
 
+# Create project directory
+echo "📁 Creating project directory"
+mkdir -p ~/projects
+
 # Install Homebrew
 echo "🍺 Installing Homebrew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
