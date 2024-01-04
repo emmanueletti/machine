@@ -53,6 +53,7 @@ brew install jq
 brew install wget
 brew install tree
 brew install overmind
+brew install bearer/tap/bearer
 
 # Install Homebrew Cask
 echo "🍺 Installing Homebrew casks"
