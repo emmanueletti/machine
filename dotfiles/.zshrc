@@ -41,8 +41,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   # Ruby
   source "$(brew --prefix)/opt/chruby/share/chruby/chruby.sh"
   source "$(brew --prefix)/opt/chruby/share/chruby/auto.sh"
-  chruby ruby-3.3
+  chruby ruby-3.2
   export RUBY_YJIT_ENABLE=1
+
+  # Rails (pg gem)
+  export PKG_CONFIG_PATH="/usr/local/opt/libpq/lib/pkgconfig"
 
   # Node
   export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/plugins/node-build/bin:$PATH"

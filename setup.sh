@@ -107,10 +107,11 @@ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
 echo "💎 Installing ruby and global gems"
 brew install chruby
 brew install ruby-install
-ruby-install ruby 3.3
+ruby-install ruby 3.2
 ~/.rubies/ruby-3.3.0/bin/gem install bundler
 ~/.rubies/ruby-3.3.0/bin/gem install solargraph
 ~/.rubies/ruby-3.3.0/bin/gem install standardrb
+brew install libpq
 
 echo "🟢 Installing node"
 brew install nodenv
