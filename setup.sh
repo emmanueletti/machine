@@ -109,10 +109,11 @@ echo "💎 Installing ruby and global gems"
 brew install chruby
 brew install ruby-install
 ruby-install ruby 3.2
+brew install libpq
 ~/.rubies/ruby-3.3.0/bin/gem install bundler
 ~/.rubies/ruby-3.3.0/bin/gem install solargraph
 ~/.rubies/ruby-3.3.0/bin/gem install standardrb
-brew install libpq
+~/.rubies/ruby-3.3.0/bin/gem install htmlbeautifier
 
 echo "🟢 Installing node"
 brew install nodenv
