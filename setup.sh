@@ -38,6 +38,7 @@ brew update
 # Install Homebrew packages
 echo "🍺 Installing Homebrew packages"
 brew install fzf
+$(brew --prefix)/opt/fzf/install --all
 brew install gh
 brew install git
 brew install hashicorp/tap/hashicorp-vagrant
