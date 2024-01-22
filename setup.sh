@@ -91,6 +91,7 @@ brew install --cask slack
 brew install --cask spotify
 brew install --cask vlc
 brew install --cask zoom
+brew install --cask calibre
 
 # Install Homebrew fonts
 echo "🍺 Installing Homebrew fonts"
