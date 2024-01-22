@@ -47,10 +47,12 @@ around vagrant commands.
 
 ```bash
 # initialize the vagrant VM dev environment
-devup
+dev # comprehensive web development VM
+hack # very lightweight VM for experimenting
 
 # ssh into a running environment
-dev
+devssh
+hackssh
 
 # shutdown a running environment
 halt
