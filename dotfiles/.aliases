@@ -8,6 +8,7 @@ alias cshell='vim ~/.zshrc'
 alias cvim='vim ~/.vimrc'
 alias gtfo='history -p'
 alias proj='cd ~/projects'
+alias configs='cd ~/configs'
 
 alias dev='cd ~/machine/devbox && vagrant up'
 alias devssh='cd ~/machine/devbox && vagrant ssh'
