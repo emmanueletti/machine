@@ -75,6 +75,7 @@ brew install --cask caffeine
 brew install --cask clocker
 brew install --cask discord
 brew install --cask dropbox
+brew install --cask freedom
 brew install --cask hyperkey
 brew install --cask logi-options-plus
 brew install --cask logitune
