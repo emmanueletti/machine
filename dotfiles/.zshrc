@@ -41,7 +41,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   # Ruby
   source "$(brew --prefix)/opt/chruby/share/chruby/chruby.sh"
   source "$(brew --prefix)/opt/chruby/share/chruby/auto.sh"
-  chruby ruby-3.2
+  chruby ruby-3.3.0
   export RUBY_YJIT_ENABLE=1
 
   # Rails (pg gem)
