@@ -93,6 +93,8 @@ brew install --cask spotify
 brew install --cask vlc
 brew install --cask zoom
 brew install --cask calibre
+brew install --cask tripmode
+brew install --cask twist
 
 # Install Homebrew fonts
 echo "🍺 Installing Homebrew fonts"
