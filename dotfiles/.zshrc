@@ -19,6 +19,8 @@ autoload -Uz compinit && compinit
 #   export EDITOR='code'
 # fi
 
+export BUNDLER_EDITOR="code"
+
 # Alias definitions.
 # For a full list of active aliases, run `alias`.
 if [ -f ~/.aliases ]; then
