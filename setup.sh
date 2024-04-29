@@ -37,10 +37,10 @@ brew update
 
 # Install Homebrew packages
 echo "🍺 Installing Homebrew packages"
+brew install coreutils curl git
 brew install fzf
 $(brew --prefix)/opt/fzf/install --all
 brew install gh
-brew install git
 brew install hashicorp/tap/hashicorp-vagrant
 vagrant plugin install vagrant-vbguest
 brew install powerlevel10k
@@ -59,9 +59,8 @@ brew install bearer/tap/bearer
 # Install Homebrew Cask
 echo "🍺 Installing Homebrew casks"
 # dev tools
-brew install --cask brave-browser
+brew install --cask google-chrome
 brew install --cask bruno
-brew install --cask dash
 brew install --cask iterm2
 brew install --cask tableplus
 brew install --cask virtualbox
@@ -69,7 +68,6 @@ brew install --cask visual-studio-code
 brew install --cask docker
 # personal tools
 brew install --cask 1password
-brew install --cask appcleaner
 brew install --cask bartender
 brew install --cask caffeine
 brew install --cask clocker
@@ -79,7 +77,6 @@ brew install --cask freedom
 brew install --cask hyperkey
 brew install --cask logi-options-plus
 brew install --cask logitune
-brew install --cask loom
 brew install --cask malwarebytes
 brew install --cask meetingbar
 brew install --cask monitorcontrol
@@ -91,10 +88,11 @@ brew install --cask raycast
 brew install --cask slack
 brew install --cask spotify
 brew install --cask vlc
-brew install --cask zoom
 brew install --cask calibre
+brew install --cask adobe-digital-editions
 brew install --cask tripmode
-brew install --cask twist
+brew install --cask notion-calendar
+brew install --cask utm
 
 # Install Homebrew fonts
 echo "🍺 Installing Homebrew fonts"
@@ -104,26 +102,20 @@ brew install --cask font-fira-code-nerd-font
 brew install --cask font-jetbrains-mono
 brew install --cask font-jetbrains-mono-nerd-font
 
-# Setup dev environment
-echo "🌐 Setting up dev environment"
+echo "💻 Setting up web dev env"
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
 
-echo "🦀 Installing rust"
-curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf install nodejs latest
+asdf global nodejs latest
 
-echo "💎 Installing ruby and global gems"
-brew install chruby
-brew install ruby-install
-ruby-install ruby 3.3.0
-brew install libpq
-~/.rubies/ruby-3.3.0/bin/gem install bundler
-~/.rubies/ruby-3.3.0/bin/gem install solargraph
-~/.rubies/ruby-3.3.0/bin/gem install standardrb
-~/.rubies/ruby-3.3.0/bin/gem install htmlbeautifier
+asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+asdf install ruby latest
+asdf global ruby latest
 
-echo "🟢 Installing node"
-brew install nodenv
-nodenv install 20.10.0
-nodenv global 20.10.0
+gem install standardrb
+gem install solargraph
+gem install rails
 
 # Set Mac settings
 # https://macos-defaults.com/

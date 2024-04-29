@@ -34,35 +34,14 @@ autoload -Uz compinit && compinit
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
+# Zsh plugins
+source "$(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme"
+source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-  # Zsh plugins
-  source "$(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme"
-  source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# Rails (pg gem)
+export PKG_CONFIG_PATH="/usr/local/opt/libpq/lib/pkgconfig"
 
-  # Ruby
-  source "$(brew --prefix)/opt/chruby/share/chruby/chruby.sh"
-  source "$(brew --prefix)/opt/chruby/share/chruby/auto.sh"
-  chruby ruby-3.3.0
-  export RUBY_YJIT_ENABLE=1
+# asdf universal version manager
+. "$HOME/.asdf/asdf.sh"
 
-  # Rails (pg gem)
-  export PKG_CONFIG_PATH="/usr/local/opt/libpq/lib/pkgconfig"
-
-  # Node
-  export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/plugins/node-build/bin:$PATH"
-  eval "$(nodenv init - zsh)"
-  nodenv global 20.10.0
-
-elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-
-  # zsh plugins
-  source ~/powerlevel10k/powerlevel10k.zsh-theme
-  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-  # chruby
-  source /usr/local/share/chruby/chruby.sh
-  source /usr/local/share/chruby/auto.sh
-
-fi
 

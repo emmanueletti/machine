@@ -1,6 +1,6 @@
 # Standard Shell
 alias c='clear'
-alias l='ls -lah'
+alias l='ls -lah --color=auto'
 alias r='exec $SHELL'
 
 # Personal productivity
