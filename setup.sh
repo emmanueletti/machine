@@ -117,6 +117,7 @@ asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
 asdf install ruby latest
 asdf global ruby latest
 
+gem install bundler
 gem install standardrb
 gem install solargraph
 gem install rails
