@@ -105,6 +105,10 @@ brew install --cask font-jetbrains-mono-nerd-font
 echo "💻 Setting up web dev env"
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
 
+asdf plugin-add rust https://github.com/asdf-community/asdf-rust.git
+asdf install rust latest
+asdf global rust latest
+
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install nodejs latest
 asdf global nodejs latest
